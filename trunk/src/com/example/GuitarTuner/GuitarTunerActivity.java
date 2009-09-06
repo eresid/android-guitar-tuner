@@ -18,6 +18,7 @@ import com.example.GuitarTuner.PitchDetector;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 
 public class GuitarTunerActivity extends Activity {
 	/** Called when the activity is first created. */
@@ -31,7 +32,7 @@ public class GuitarTunerActivity extends Activity {
 	@Override
 	public void onStart() {
 		super.onStart();
-		pitch_detector_thread_ = new Thread(new PitchDetector(this));
+		pitch_detector_thread_ = new Thread(new PitchDetector(this, new Handler()));
 		pitch_detector_thread_.start();
 	}
 
@@ -46,7 +47,6 @@ public class GuitarTunerActivity extends Activity {
 			final HashMap<Double, Double> frequencies,
 			final double pitch) {
 		tv_.setDetectionResults(frequencies, pitch);
-		tv_.invalidate();
 	}
 
 	DrawableView tv_;
