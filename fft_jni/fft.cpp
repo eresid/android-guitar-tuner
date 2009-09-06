@@ -1,12 +1,12 @@
-/*
- * fft.cc
- *
- *  Created on: Sep 5, 2009
- *      Author: surkov
+/** Copyright (C) 2009 by Aleksey Surkov.
+ **
+ ** Permission to use, copy, modify, and distribute this software and its
+ ** documentation for any purpose and without fee is hereby granted, provided
+ ** that the above copyright notice appear in all copies and that both that
+ ** copyright notice and this permission notice appear in supporting
+ ** documentation.  This software is provided "as is" without express or
+ ** implied warranty.
  */
-
-// Taken from http://www.ddj.com/cpp/199500857
-// which took it from Numerical Recipes in C++, p.513
 
 #include <math.h>
 #include <android/log.h>
@@ -24,6 +24,8 @@ template<class T> inline void swap(T &x, T&y) {
 	z = x; x = y; y = z;
 }
 
+// Taken from http://www.ddj.com/cpp/199500857
+// which took it from Numerical Recipes in C++, p.513
 void DoFFTInternal(jdouble* data, jint nn) {
 	unsigned long n, mmax, m, j, istep, i;
 	jdouble wtemp, wr, wpr, wpi, wi, theta;

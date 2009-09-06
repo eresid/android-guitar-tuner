@@ -30,7 +30,7 @@ public class PitchDetector implements Runnable {
 	private final static int ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
 	private final static int BUFFER_SIZE_IN_MS = 3000;
-	private final static int CHUNK_SIZE_IN_SAMPLES = 2048; // = 2 ^
+	private final static int CHUNK_SIZE_IN_SAMPLES = 4096; // = 2 ^
 															// CHUNK_SIZE_IN_SAMPLES_POW2
 	private final static int CHUNK_SIZE_IN_MS = 1000 * CHUNK_SIZE_IN_SAMPLES
 			/ RATE;
@@ -41,14 +41,13 @@ public class PitchDetector implements Runnable {
 	private final static int MIN_FREQUENCY = 50; // HZ
 	private final static int MAX_FREQUENCY = 600; // HZ - it's for guitar,
 													// should be enough
-	private final static int DRAW_FREQUENCY_STEP = 1;
+	private final static int DRAW_FREQUENCY_STEP = 5;
 
 	public native void DoFFT(double[] data, int size);  // an NDK library 'fft-jni'
-	public native void CheckLib(int bzz);  // an NDK library 'fft-jni'
 	
-	public PitchDetector(GuitarTunerActivity parent) {
+	public PitchDetector(GuitarTunerActivity parent, Handler handler) {
 		parent_ = parent;
-		handler_ = new Handler();
+		handler_ = handler;
         System.loadLibrary("fft-jni");
  	}
 
